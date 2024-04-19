@@ -1,0 +1,24 @@
+<h1>Posts#index</h1>
+  <div class="row justify-content-md-center">
+    <div class="col-sm-3">
+      1 of 3
+    </div>
+
+    <div class="col-sm-6">
+      <% @post.each do |post| %>
+        <p>
+          <%= link_to post_path(post.id), class: "d-block" do %>
+            <%= image_tag post.get_image(300,300), class: "img-fluid" %>
+          <% end %>
+        </p>
+        <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
+        <p>タイトル：<%= post.title %></p>
+        <p>本文：<%= post.body %></p>
+        <p>ユーザーネーム：<%= post.user.name %></p>
+        <% end %>
+    </div>
+
+    <div class="col-sm-3">
+      3 of 3
+    </div>
+  </div>
