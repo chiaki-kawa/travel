@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
 
   resources :posts do
-    resources :comments, only: [:create]
+    resources :post_comments, only: [:create, :destroy]
     get :tags, on: :collection
   end
 
