@@ -25,4 +25,7 @@ class Post < ApplicationRecord
     end
   end
 
+  validates :title, presence: true
+  validates :body, presence: true
+
 end

@@ -1,24 +1,18 @@
 <h1>Posts#show</h1>
   <div class="row justify-content-md-center">
-    <div class="col">
-      ユーザー
+    <div class="col-md-3">
+      <%= image_tag @post.user.get_profile_image(200,200) %>
+      <p><%= @post.user.name %></p>
+      <p>
+        <% if @post.user == current_user %>
+          <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-outline-secondary" %>
+        <% end %>
+      </p>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-6">
       <%= image_tag @post.get_image(200,200) %>
-      <p>タイトル：<%= @post.title %></p>
-      <p>本文：<%= @post.body %></p>
-      <p>タグ一覧：<% @post.tags.each do |tag| %><%= tag.name %><% end %></p>
-      <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-      <p>ユーザーネーム：<%= @post.user.name %></p>
-      <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-      <% if @post.user == current_user %>
-        <%= link_to "編集", edit_post_path(@post) %>
-      <% end %>
-      <% if @post.user == current_user %>
-        <%= link_to "削除", post_path(@post), method: :delete %>
-      <% end %>
-
+      <!--いいね-->
       <% if @post.favorited_by?(current_user) %>
         <p>
           <%= link_to post_favorite_path(@post), method: :delete do %>
@@ -32,14 +26,27 @@
           <% end %>
         </p>
       <% end %>
+
+      <p>タイトル：<%= @post.title %></p>
+      <p>本文：<%= @post.body %></p>
+      <p>タグ一覧：<% @post.tags.each do |tag| %><%= tag.name %><% end %></p>
+      <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+      <% if @post.user == current_user %>
+        <%= link_to "編集", edit_post_path(@post) %>
+      <% end %>
+      <% if @post.user == current_user %>
+        <%= link_to "削除", post_path(@post), method: :delete %>
+      <% end %>
+
+
     </div>
 
-    <div class="col">
+    <div class="col-md-3">
       <p>コメント件数：<%= @post.post_comments.count %></p>
       <% @post.post_comments.each do |post_comment| %>
-      <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
         <%= post_comment.user.name %>
-        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        <p><%= post_comment.comment %></p>
         <% if post_comment.user == current_user %>
           <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
         <% end %>
