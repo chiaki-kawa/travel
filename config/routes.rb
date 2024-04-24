@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :post_comments, only: [:create, :destroy]
+    resource :favorite, only: [:create, :destroy]
     get :tags, on: :collection
   end
 
