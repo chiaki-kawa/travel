@@ -11,3 +11,9 @@
     <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary" do %>
       <i class="fa-solid fa-gear"></i>
     <% end %>
+
+    <% unless user.guest_user? %>
+      <div class="row">
+        <%= link_to "",edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+      </div>
+    <% end %>

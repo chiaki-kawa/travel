@@ -22,8 +22,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @post = Post.all
-    @tag_list = PostTag.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @tags = Tag.all
   end
 
   def show
@@ -33,6 +33,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @tag_list = @post.tags.pluck(:tag_name)
   end
 
   def update
@@ -53,7 +54,7 @@ class PostsController < ApplicationController
   end
 
   def tags
-    @tag_list = Tag.all
+    @tags = Tag.all
   end
 
   private
