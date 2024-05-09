@@ -1,9 +1,23 @@
 Rails.application.routes.draw do
   root 'home#top'
+
+  get "search" => "searches#search"
+
+  get 'maps/index'
+  resources :maps, only: [:index]
+
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+    sessions: "admins/sessions"
+  }
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
   }
+
+  # 退会確認画面
+  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  # 論理削除用のルーティング
+  patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
 
   resources :posts do
     resources :post_comments, only: [:create, :destroy]
@@ -12,12 +26,10 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show, :edit, :update]
-  
+
   devise_scope :user do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
-
-  get "search_tag" => "posts#search_tag"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
