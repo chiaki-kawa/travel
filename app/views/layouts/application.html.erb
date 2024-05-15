@@ -12,6 +12,7 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
+
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -19,44 +20,52 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to '投稿一覧', posts_path, class: "nav-link" %>
-                  </a>
+                  <%= link_to posts_path, class: "nav-link" do %>
+                  <i class="fa-solid fa-list"></i>Posts list
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to '投稿フォーム', new_post_path, class: "nav-link" %>
-                  </a>
+                  <%= link_to new_post_path, class: "nav-link" do %>
+                  <i class="fa-regular fa-square-plus"></i>New Post
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to 'マイページ', user_path(current_user.id), class: "nav-link" %>
-                  </a>
+                  <%= link_to user_path(current_user.id), class: "nav-link" do %>
+                  <i class="fa-solid fa-user"></i>My page
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-                  </a>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
+                  <i class="fa-solid fa-right-from-bracket"></i>Log out
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= render "searches/search" %>
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to "TOP", root_path, class: "nav-link" %>
-                  </a>
+                  <%= link_to root_path, class: "nav-link" do %>
+                  <i class="fa-solid fa-house"></i>TOP
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
-                  </a>
+                  <%= link_to root_path, class: "nav-link" do %>
+                  <i class="fa-solid fa-link"></i>About
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
-                  </a>
+                  <%= link_to new_user_session_path, class: "nav-link" do %>
+                  <i class="fa-solid fa-right-to-bracket"></i>Log in
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class: "nav-link" do %>
+                  <i class="fa-solid fa-user-plus"></i>Sign in
+                  <% end %>
                 </li>
               <% end %>
             </ul>

@@ -1,7 +1,9 @@
-<h1>Posts#index</h1>
+<h1>Posts list</h1>
   <div class="row">
     <div class="col-md-4">
-      <%= link_to "タグ一覧", tags_posts_path %>
+      <%= link_to tags_posts_path, class: "btn btn-primary" do%>
+      <i class="fa-solid fa-tags"></i>Tags list
+      <% end %>
     </div>
 
     <div class="col-md-8">
