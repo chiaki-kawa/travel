@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
   root 'home#top'
 
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
+
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
+  end
+
   get "search" => "searches#search"
 
   get 'maps/index'
   resources :maps, only: [:index]
 
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
-    sessions: "admins/sessions"
-  }
-  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
