@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  
   def new
     @post = Post.new
   end
@@ -16,13 +19,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
+    @post.destroy
     redirect_to posts_path
   end
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.page(params[:page])
     @tags = Tag.all
   end
 
@@ -32,12 +34,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:tag_name)
   end
 
   def update
-    post = Post.find(params[:id])
     tag_list = params[:post][:tag_id].split(',')
     if @post.update(post_params)
       @post.savetags(tag_list)
@@ -61,5 +61,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :image, :body, :latitude, :longitude, :address)
+  end
+  
+  def correct_user
+    @post = current_user.posts.find_by_id(params[id])
+    redirect_to root_path if !@post
   end
 end

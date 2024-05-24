@@ -7,6 +7,7 @@ class Users::SessionsController < Devise::SessionsController
     redirect_to user_path(user), notice: "guestuserでログインしました。"
   end
 
+
   def after_sign_in_path_for(resource)
     posts_path
   end
@@ -15,6 +16,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   protected
+  
 
   # 会員の論理削除のための記述。退会後は、同じアカウントでは利用できない。
   def reject_user

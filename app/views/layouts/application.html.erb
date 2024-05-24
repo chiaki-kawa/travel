@@ -29,9 +29,9 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to new_post_path, class: "nav-link" do %>
-                  <i class="fa-regular fa-square-plus"></i>New Post
-                  <% end %>
+                    <%= link_to new_post_path, class: "nav-link" do %>
+                    <i class="fa-regular fa-square-plus"></i>New Post
+                    <% end %>
                 </li>
                 <li class="nav-item">
                   <%= link_to user_path(current_user.id), class: "nav-link" do %>
@@ -72,8 +72,8 @@
           </div>
         </div>
       </nav>
+      <%= yield :bg_area %>
     </header>
-
     <main class="container mb-auto">
       <%= yield %>
     </main>

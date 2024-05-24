@@ -1,13 +1,15 @@
-<section class="jumbotron text-center">
-  <h1 class="jumbotron-heading">ようこそ、トラベルコミュへ</h1>
-  <p class="lead text-muted mb-4">
-    ここは旅行好きのための交流サイトです<br>
-    思い出を投稿して共有したり<br>
-    次の旅行先を探すのに役立ててください<br>
-  </p>
-  <p class="d-grid gap-2 mx-auto">
-    <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
-    <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary" %>
-    <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary sign_in", method: :post %>
-  </p>
-</section>
+<%= content_for :bg_area do %>
+  <section class="jumbotron text-center bg01">
+    <h1 class="jumbotron-heading">ようこそ、トラベルコミュへ</h1>
+    <p class="lead text-muted mb-4">
+      ここは旅行好きのための交流サイトです。<br>
+      思い出を投稿して共有したり<br>
+      次の旅行先を探すのに役立ててください。<br>
+    </p>
+    <p class="d-grid gap-2 mx-auto">
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary" %>
+      <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary sign_in", method: :post %>
+    </p>
+  </section>
+<% end %>

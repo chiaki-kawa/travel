@@ -10,15 +10,15 @@ Rails.application.routes.draw do
     resources :users, only: [:destroy]
   end
 
-  get "search" => "searches#search"
-
-  get 'maps/index'
-  resources :maps, only: [:index]
-
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
   }
+
+  get "search" => "searches#search"
+
+  get 'maps/index'
+  resources :maps, only: [:index]
 
   # 退会確認画面
   get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'

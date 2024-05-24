@@ -1,4 +1,4 @@
-<h1>Users#show</h1>
+<h1>My Page</h1>
 
 <div class="row justify-content-md-center">
 
@@ -7,8 +7,10 @@
     <%= image_tag @user.get_profile_image(200,200) %>
     <p>名前：<%= @user.name %></p>
     <p>
-      <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary" do %>
-        <i class="fa-solid fa-gear">プロフィール編集</i>
+      <% if @user.email != "guest@example.com" %>
+        <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary" do %>
+          <i class="fa-solid fa-gear">プロフィール編集</i>
+        <% end %>
       <% end %>
     </p>
   </div>
