@@ -1,11 +1,13 @@
-<h1>投稿詳細</h1>
+<h1>Post Details</h1>
   <div class="row justify-content-md-center">
     <div class="col-md-3">
       <%= image_tag @post.user.get_profile_image(200,200) %>
       <p><%= @post.user.name %></p>
       <p>
         <% if @post.user == current_user %>
-          <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-outline-secondary" %>
+          <%= link_to edit_user_path, class: "btn btn-outline-secondary" do %>
+            <i class="fa-solid fa-gear">プロフィール編集</i>
+          <% end %>
         <% end %>
       </p>
     </div>
@@ -59,14 +61,23 @@
         </p>
       <% end %>
 
-      <p>タイトル：<%= @post.title %></p>
-      <p>本文：<%= @post.body %></p>
-      <p>タグ一覧：<% @post.tags.each do |tag| %><%= tag.name %><% end %></p>
-      <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+      <div class="border-bottom">Title：<%= @post.title %></div>
+      <div class="border-bottom">Body：<%= @post.body %></div>
+      <div class="border-bottom">
+        Tag：
+        <% @post.tags.each do |tag| %>
+          <%= link_to tag.name, post_path(tag.id) %>
+        <% end %>
+      </div>
+      <p>Submission Date：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
       <% if user_signed_in? %>
         <% if @post.user == current_user %>
-          <%= link_to "編集", edit_post_path(@post) %>
-          <%= link_to "削除", post_path(@post), method: :delete %>
+          <%= link_to edit_post_path(@post), class: "btn btn-outline-secondary" do %>
+            <i class="fa-solid fa-gear">編集</i>
+          <% end %>
+          <%= link_to post_path(@post), method: :delete, class: "btn btn-outline-danger" do %>
+            <i class="fa-regular fa-trash-can">削除</i>
+          <% end %>
         <% end %>
       <% end %>
 
@@ -79,7 +90,7 @@
         <%= post_comment.created_at.strftime('%Y/%m/%d') %>
         <p><%= post_comment.comment %></p>
         <% if post_comment.user == current_user %>
-          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete  %>
         <% end %>
       <% end %>
       <%= form_with model: [@post, @post_comment] do |f| %>
