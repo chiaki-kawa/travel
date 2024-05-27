@@ -9,9 +9,13 @@
     <p>
       <% if @user.email != "guest@example.com" %>
         <p>自己紹介：<%= @user.introduction %></p>
-        <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary" do %>
+        <p><%= link_to favorites_user_path(current_user), class: "btn btn-pink" do %>
+          <i class="fa-solid fa-heart">いいね一覧</i>
+        <% end %></p>
+        <p><%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary" do %>
           <i class="fa-solid fa-gear">プロフィール編集</i>
-        <% end %>
+        <% end %></p>
+
       <% end %>
     </p>
   </div>

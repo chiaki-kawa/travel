@@ -11,3 +11,10 @@
 .pagination {
   justify-content: center;
 }
+
+.btn-pink,
+.btn-pink.disabled, .btn-pink:disabled {
+  color: #fff;
+  background-color: #ff7bff;
+  border-color: #ff7bff;
+}

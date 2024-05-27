@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     get :tags, on: :collection
   end
 
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update] do
+    member do
+      get :favorites 
+    end
+  end
 
   devise_scope :user do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
