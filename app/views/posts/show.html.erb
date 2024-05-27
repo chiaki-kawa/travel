@@ -67,7 +67,7 @@
       <div class="border-bottom">
         Tag：
         <% @post.tags.each do |tag| %>
-          <%= link_to tag.name, post_path(tag.id) %>
+          <%= tag.name %>
         <% end %>
       </div>
       <p>Submission Date：<%= @post.created_at.strftime('%Y/%m/%d') %></p>

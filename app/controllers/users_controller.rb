@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.page(params[:page]).per(3)
   end
 
   def edit
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   def withdrawal
     @user = User.find(params[:id])
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる

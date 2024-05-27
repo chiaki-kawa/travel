@@ -1,4 +1,4 @@
-<h1>User info</h1>
+<h1>Plofile</h1>
 
   <%= form_with model: @user do |f| %>
     <h4>Name</h4>
@@ -10,5 +10,6 @@
     <h4>Introduction</h4>
     <p><%= f.text_field :introduction, autofocus: true, id:"inputIntroduction" %></p>
 
-    <%= f.submit "Update User", class: "btn btn-secondary" %>
+    <p><%= f.submit "プロフィール更新", class: "btn btn-secondary" %></p>
+    <%= link_to "退会する", unsubscribe_path(current_user), class: "btn btn-outline-danger" %>
   <% end %>

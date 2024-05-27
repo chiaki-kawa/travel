@@ -8,22 +8,23 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:destroy]
+    resources :post_comments, only: [:destroy]
   end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
   }
+  
+  # 退会確認画面
+  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  # 論理削除用のルーティング
+  patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
 
   get "search" => "searches#search"
 
   get 'maps/index'
   resources :maps, only: [:index]
-
-  # 退会確認画面
-  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
-  # 論理削除用のルーティング
-  patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
 
   resources :posts do
     resources :post_comments, only: [:create, :destroy]
