@@ -3,6 +3,7 @@
     <div class="col-md-3">
       <%= image_tag @post.user.get_profile_image(200,200) %>
       <p><%= @post.user.name %></p>
+      <p><%= @post.user.introduction %></p>
       <p>
         <% if @post.user == current_user %>
           <%= link_to edit_user_path, class: "btn btn-outline-secondary" do %>

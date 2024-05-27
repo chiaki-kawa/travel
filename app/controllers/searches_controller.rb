@@ -4,7 +4,6 @@ class SearchesController < ApplicationController
   def search
     @range = params[:range]
     @posts = Post.includes(:post_tags) 
-    @posts = @post.page(params[:page])
     
     if @range == "Post"
       @posts = @posts.looks(params[:search], params[:word])
