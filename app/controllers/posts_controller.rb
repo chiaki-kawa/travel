@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.page(params[:page]).per(5)
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.order("created_at DESC").page(params[:page]).per(5)
     @tags = Tag.all
   end
 
